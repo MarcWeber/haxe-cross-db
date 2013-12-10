@@ -1,5 +1,5 @@
 package db;
-import mw.Continuation;
+import cont.Continuation;
 
 // minimal interface required to run the db operations {{{1
 // TODO move into its own module?
@@ -8,8 +8,7 @@ interface ConnectionInterface {
   // function request(s : String): Cont<mw.db.ResultSetInterface>;
 
   // shortcuts:
-  function request(s: String): Cont<Void>; // insert / delete / .., no result expected.
-
+  function request(s: String): Cont<CVoid>; // insert / delete / .., no result expected.
 
   function queryRows(s: String): Cont<Array<Map<String,Dynamic>>>;
   function queryFirstCol(s: String): Cont<Array<Dynamic>>;

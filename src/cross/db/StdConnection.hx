@@ -1,4 +1,4 @@
-package db;
+package cross.db;
 
 // ConnectionInterface based on std.* for non js backends
 class StdConnection {

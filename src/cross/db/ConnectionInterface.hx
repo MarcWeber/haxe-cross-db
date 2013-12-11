@@ -1,5 +1,5 @@
-package db;
-import cont.Continuation;
+package cross.db;
+import cross.Cont;
 
 // minimal interface required to run the db operations {{{1
 // TODO move into its own module?

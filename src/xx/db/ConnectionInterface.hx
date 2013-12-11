@@ -1,5 +1,5 @@
-package cross.db;
-import cross.Cont;
+package xx.db;
+import xx.Cont;
 
 // minimal interface required to run the db operations {{{1
 // TODO move into its own module?

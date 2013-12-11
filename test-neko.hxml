@@ -1,0 +1,6 @@
+-cp test
+-cp src
+-cp ../haxe-continuation/src
+-cp ../monax/src
+-neko Test.n
+-main Test.hx

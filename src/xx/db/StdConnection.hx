@@ -1,33 +1,56 @@
 package xx.db;
+using Lambda;
 
-// ConnectionInterface based on std.* for non js backends
-class StdConnection {
+// ConnectionInterface based on sys.db.Connection for non js backends
+// TODO: optimize for PHP
+class StdConnection implements xx.db.ConnectionInterface {
 
-  public var connection: sys.
-  public function new(arg) {
-  }
-  function request(s: String){
-  }
+  public var connection: sys.db.Connection;
 
-  function queryRows(s: String): Cont<Array<Map<String,Dynamic>>> {
-    //TODO
-  }
-  function queryFirstCol(s: String): Cont<Array<Dynamic>>{
-    // TODO
-  }
-  function queryValue(s: String): Cont<Dynamic>{
-    // TODO
+  public function new(c) {
+    this.connection = c;
   }
 
-  function quote( s : String ) : String{
-    // TODO
+  public function request(sql: String){
+    return xx.ContUtil.cont({
+      this.connection.request(sql);
+      null;
+    });
   }
-  function quote_name( s : String ) : String {
-    // TODO
+
+  public function queryRows(sql: String): Cont<Array<Dynamic>> {
+    return xx.ContUtil.cont({
+      var r = this.connection.request(sql);
+      r.results().array();
+    });
+  }
+
+  public function queryFirstCol(sql: String): Cont<Array<Dynamic>>{
+    return xx.ContUtil.cont({
+      var r = this.connection.request(sql);
+      var first = r.getFieldsNames()[0];
+      r.results().map(function(x){ Reflect.field(x, first); }).array();
+    });
+  }
+  public function queryValue(sql: String): Cont<Dynamic>{
+    return xx.ContUtil.cont({
+      var r = this.connection.request(sql);
+      var first = r.getFieldsNames()[0];
+      r.results().map(function(x){ Reflect.field(x, first); });
+    });
+  }
+
+  public function quote( name : String ) : String{
+    return this.connection.quote(name);
+  }
+  public function quote_name( name : String ) : String {
+    return name;
   }
 
   // result might throw an exception
-  function lastInsertId():Cont<Int>{
-    // TODO
+  public function lastInsertId():Cont<Int>{
+    return xx.ContUtil.cont({
+      this.connection.lastInsertId();
+    });
   }
 }

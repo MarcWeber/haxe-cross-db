@@ -10,7 +10,7 @@ interface ConnectionInterface {
   // shortcuts:
   function request(s: String): Cont<CVoid>; // insert / delete / .., no result expected.
 
-  function queryRows(s: String): Cont<Array<Map<String,Dynamic>>>;
+  function queryRows(s: String): Cont<Array<Dynamic>>;
   function queryFirstCol(s: String): Cont<Array<Dynamic>>;
   function queryValue(s: String): Cont<Dynamic>;
 
